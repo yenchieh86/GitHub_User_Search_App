@@ -1,1 +1,10 @@
-<p><%= @result %></p>
+<% if @user === 0 %>
+    <h2>Please enter a valid username</h2>
+<% else %>
+
+    <% @user.each do |key, value| %>
+        <h3><%= key %>  -  <%= value %></h3>
+    <% end %>
+    
+    <h4><%= @user %></h4>
+<% end %>
