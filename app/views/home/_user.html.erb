@@ -19,6 +19,9 @@
     <h3>Score: <%= @user['score'] %></h3>
    ------------- 
     <% if @followers[0].include?("login") %>
+        <div>
+            <h3>Total Follower: <%= @user["total_follower"] %></h3>
+        </div>
         <div id='follower_btn_area'>
             <%= form_tag(show_follower_path, remote: true, method: "get", id: 'show_follower') do %>
                 <%= hidden_field_tag :page_num, 1 %>
@@ -29,6 +32,7 @@
         <div id='follower_area'></div>
     <% else %>
         <div>
+            <%= @followers %>
             <h1>This user doesn't have any followers</h1>
         </div>
     <% end %>

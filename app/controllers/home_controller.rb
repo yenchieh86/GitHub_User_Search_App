@@ -14,6 +14,7 @@ class HomeController < ApplicationController
         @user = 0
       else
         @user = single_user_info(user)
+        @user["total_follower"] = get_user_profile_page(params[:q])
         @followers = separate_user_from_list("https://api.github.com/users/#{@user['login']}/followers")
         
       end
