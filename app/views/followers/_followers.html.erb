@@ -1,5 +1,18 @@
-<h1><%= @followers%></h1>
-<h1><%= @followers.class %></h1>
+<% if @last_button %>
+  <%= form_tag(show_follower_path, remote: true, method: "get") do %>
+    <%= hidden_field_tag :page_num, @current_page - 1 %>
+    <%= hidden_field_tag :follower_link, @link %>
+    <%= submit_tag("Last Page") %>
+  <% end %>
+<% end %>
+
+<% if @next_button %>
+  <%= form_tag(show_follower_path, remote: true, method: "get") do %>
+    <%= hidden_field_tag :page_num, @current_page + 1 %>
+    <%= hidden_field_tag :follower_link, @link %>
+    <%= submit_tag("Next Page") %>
+  <% end %>
+<% end %>
 
 <% @followers.each do |user| %>
   <%= image_tag(user['avatar_url']) %>

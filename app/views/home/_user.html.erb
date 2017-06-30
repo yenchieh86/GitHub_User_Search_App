@@ -25,24 +25,7 @@
                 <%= hidden_field_tag :follower_link, @user['followers_url'] %>
                 <%= submit_tag("Show Follower") %>
             <% end %>
-
-            
-            
-            
-            
-            <h1><%= @followers[0].empty? %></h1>
-            <h1><%= @followers[0] %></h1>
-            <h1><%= @followers[0].class %></h1>
-            <h4><%= @followers.length %></h4>
-            <h1><%= @followers[0].include?("login") %></h1>
-            <% @followers.each_with_index do |x, i| %>
-                <h4><%= i %>  -  <%= x %></h4>
-            <% end %>
-            
-            <h4><%= @followers %></h4>
         </div>
-        
-        
         <div id='follower_area'></div>
     <% else %>
         <div>
