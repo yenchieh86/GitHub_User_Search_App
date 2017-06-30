@@ -1,0 +1,8 @@
+<h1><%= @followers%></h1>
+<h1><%= @followers.class %></h1>
+
+<% @followers.each do |user| %>
+  <%= image_tag(user['avatar_url']) %>
+  <h3>Username: <%= user['login'] %></h3>
+  <h3><%= link_to "GitHub Profile Link", user['html_url'] %></h3>
+<% end %>

@@ -18,10 +18,37 @@
     <h3>A Site Admin? : <%= @user['site_admin'] ? 'YES' : 'NO' %></h3>
     <h3>Score: <%= @user['score'] %></h3>
    ------------- 
-    <div id='follower_btn_area'>
-        <h1><%= @followers %></h1>
-    </div>
-    <div id='follower_area'></div>
+    <% if @followers[0].include?("login") %>
+        <div id='follower_btn_area'>
+            <%= form_tag(show_follower_path, remote: true, method: "get", id: 'show_follower') do %>
+                <%= hidden_field_tag :page_num, 1 %>
+                <%= hidden_field_tag :follower_link, @user['followers_url'] %>
+                <%= submit_tag("Show Follower") %>
+            <% end %>
+
+            
+            
+            
+            
+            <h1><%= @followers[0].empty? %></h1>
+            <h1><%= @followers[0] %></h1>
+            <h1><%= @followers[0].class %></h1>
+            <h4><%= @followers.length %></h4>
+            <h1><%= @followers[0].include?("login") %></h1>
+            <% @followers.each_with_index do |x, i| %>
+                <h4><%= i %>  -  <%= x %></h4>
+            <% end %>
+            
+            <h4><%= @followers %></h4>
+        </div>
+        
+        
+        <div id='follower_area'></div>
+    <% else %>
+        <div>
+            <h1>This user doesn't have any followers</h1>
+        </div>
+    <% end %>
     --------------
 <% end %>
 

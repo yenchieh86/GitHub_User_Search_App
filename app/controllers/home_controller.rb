@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   
   
   def search
-    info = check_user(params[:q])
+    info = get_element("https://api.github.com/search/users?q=#{params[:q]}")
     
     if info.include?('"message":"Validation Failed"') || info.include?('"total_count":0')
       @user = 0
@@ -14,7 +14,8 @@ class HomeController < ApplicationController
         @user = 0
       else
         @user = single_user_info(user)
-        @followers = any_follower(@user)
+        @followers = separate_user_from_list("https://api.github.com/users/#{@user['login']}/followers")
+        
       end
     end
     
@@ -24,11 +25,6 @@ class HomeController < ApplicationController
   end
   
   private
-  
-    def check_user(username)
-      uri = URI('https://api.github.com/search/users?q=' + username)
-      result = Net::HTTP.get(uri)
-    end
     
     def is_user_in_the_list?(info, username)
       info.slice(/"login":"#{username}".*?"score".*?}/)
@@ -49,12 +45,4 @@ class HomeController < ApplicationController
       user.map{ |x| x[1].delete!('"')}
       user
     end
-    
-    def any_follower(user)
-      uri = URI('https://api.github.com/users/rjmolesa/followers')
-      result = Net::HTTP.get(uri)
-      
-    end
-
-
 end
