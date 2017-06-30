@@ -2,13 +2,20 @@ class HomeController < ApplicationController
   def index
   end
   
+  
   def search
     info = check_user(params[:q])
     
     if info.include?('"message":"Validation Failed"') || info.include?('"total_count":0')
       @user = 0
     else
-      @user = single_user_info(info)
+      user = is_user_in_the_list?(info, params[:q])
+      if(user === nil )
+        @user = 0
+      else
+        @user = single_user_info(user)
+        @followers = any_follower(@user)
+      end
     end
     
     respond_to do |format|
@@ -23,8 +30,13 @@ class HomeController < ApplicationController
       result = Net::HTTP.get(uri)
     end
     
+    def is_user_in_the_list?(info, username)
+      info.slice(/"login":"#{username}".*?"score".*?}/)
+    end
+    
+
     def single_user_info(info)
-      userdata = info.slice(/"login".*?"score".*?}/).chomp('}').split(',')
+      userdata = info.chomp('}').split(',')
       
       user = Hash.new
       properties = ['login', 'id', 'avatar_url', 'gravatar_id', 'url',
@@ -37,4 +49,12 @@ class HomeController < ApplicationController
       user.map{ |x| x[1].delete!('"')}
       user
     end
+    
+    def any_follower(user)
+      uri = URI('https://api.github.com/users/rjmolesa/followers')
+      result = Net::HTTP.get(uri)
+      
+    end
+
+
 end

@@ -1,10 +1,32 @@
 <% if @user === 0 %>
     <h2>Please enter a valid username</h2>
 <% else %>
-
-    <% @user.each do |key, value| %>
-        <h3><%= key %>  -  <%= value %></h3>
-    <% end %>
-    
-    <h4><%= @user %></h4>
+    <%= image_tag(@user['avatar_url']) %>
+    <h3>Username: <%= @user['login'] %></h3>
+    <h3>GitHub ID: <%= @user['id'] %></h3>
+    <h3>Gravatar ID: <%= @user['gravatar_id '] === nil ? "No Gravatar ID" : @user['gravatar_id '] %> </h3>
+    <h3><%= link_to "GitHub API Search Link", @user['url'] %></h3>
+    <h3><%= link_to "GitHub Profile Link", @user['html_url'] %></h3>
+    <h3>Gists Link: <%= @user['gists_url'] %></h3>
+    <h3>Starred Link: <%= @user['starred_url'] %></h3>
+    <h3><%= link_to "Subscriptions Link", @user['subscriptions_url'] %></h3>
+    <h3><%= link_to "Organizations Link", @user['organizations_url'] %></h3>
+    <h3><%= link_to "Repos Link", @user['repos_url'] %></h3>
+    <h3>Events Link: <%= @user['events_url'] %></h3>
+    <h3><%= link_to "Received Events Link", @user['received_events_url'] %></h3>
+    <h3>User Type: <%= @user['type'] %></h3>
+    <h3>A Site Admin? : <%= @user['site_admin'] ? 'YES' : 'NO' %></h3>
+    <h3>Score: <%= @user['score'] %></h3>
+   ------------- 
+    <div id='follower_btn_area'>
+        <h1><%= @followers %></h1>
+    </div>
+    <div id='follower_area'></div>
+    --------------
 <% end %>
+
+
+
+
+
+
