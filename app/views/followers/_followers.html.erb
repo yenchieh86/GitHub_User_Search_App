@@ -8,7 +8,6 @@
       <% end %>
     </div>
   <% end %> 
-  
   <% if @next_button %>
     <div class='col-md-3'>
       <%= form_tag(show_follower_path, remote: true, method: "get") do %>
@@ -25,4 +24,3 @@
     <%= render partial: "show", locals: {follower: follower} %>
   <% end %>
 </div>
-

@@ -27,7 +27,6 @@
   </div>
   
   <% if @followers[0].include?("login") %>
-  
     <div class='row'>
       <div class='col-md-12'>
         <h3>Total Follower: <%= @user["total_follower"] %></h3>
@@ -41,13 +40,9 @@
       </div>
     </div>
     <div id='follower_area'></div>
-    
   <% else %>
-  
     <div class='row'>
         <h2 id='error_message' class='col-md-6 col-md-offset-3 text-center'>This user doesn't have any followers</h2>
     </div>
-    
   <% end %>
-  
 <% end %>
