@@ -1,0 +1,11 @@
+<div class='col-md-3 text-center follower_info'>
+  <div class='row'>
+    <% if follower['avatar_url'] %>
+      <%= image_tag(follower['avatar_url'], class: "img-responsive", size: '285') %>
+    <% else %>
+      <%= image_tag('http://www.dejay.co.za/wp-content/uploads/2016/03/noimg.gif', class: "img-responsive", size: '285') %>
+    <% end %>
+  </div>
+  <h3><%= follower['login'] %></h3>
+  <h3><%= link_to "GitHub Profile Link", follower['html_url'] %></h3>
+</div>

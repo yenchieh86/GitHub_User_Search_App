@@ -1,10 +1,21 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h1 class='text-center'>GitHub User Search Engine</h1>
+    </div>
+  </div>
+</nav>
 
-  <%= form_tag(search_user_path, remote: true, method: "get") do %>
-    <%= label_tag(:q, "Username:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-
-<div id='user_area'></div>
+<div class='container'>
+  <div class='row text-center'>
+    <h4>Search GitHub user by enter their username</h4>
+    <%= form_tag(search_user_path, remote: true, method: "get") do %>
+      <%= label_tag(:q, "Username:") %>
+      <%= text_field_tag(:q) %>
+      <%= submit_tag("Search", class: 'btn btn-primary btn-sm') %>
+    <% end %>
+  </div>
+  
+  <div id='user_area'>
+  </div>
+</div>

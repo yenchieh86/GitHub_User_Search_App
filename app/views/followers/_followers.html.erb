@@ -1,25 +1,28 @@
-<% if @last_button %>
-  <%= form_tag(show_follower_path, remote: true, method: "get") do %>
-    <%= hidden_field_tag :page_num, @current_page - 1 %>
-    <%= hidden_field_tag :follower_link, @link %>
-    <%= submit_tag("Last Page") %>
+<div class='row'>
+  <% if @last_button %>    
+    <div class='col-md-3'>
+      <%= form_tag(show_follower_path, remote: true, method: "get") do %>
+        <%= hidden_field_tag :page_num, @current_page - 1 %>
+        <%= hidden_field_tag :follower_link, @link %>
+        <%= submit_tag("Last Page") %>
+      <% end %>
+    </div>
+  <% end %> 
+  
+  <% if @next_button %>
+    <div class='col-md-3'>
+      <%= form_tag(show_follower_path, remote: true, method: "get") do %>
+        <%= hidden_field_tag :page_num, @current_page + 1 %>
+        <%= hidden_field_tag :follower_link, @link %>
+        <%= submit_tag("Next Page") %>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>
 
-<% if @next_button %>
-  <%= form_tag(show_follower_path, remote: true, method: "get") do %>
-    <%= hidden_field_tag :page_num, @current_page + 1 %>
-    <%= hidden_field_tag :follower_link, @link %>
-    <%= submit_tag("Next Page") %>
+<div class='row follower_show'>
+  <% @followers.each do |follower| %>
+    <%= render partial: "show", locals: {follower: follower} %>
   <% end %>
-<% end %>
+</div>
 
-<% @followers.each do |user| %>
-  <% if user['avatar_url'] %>
-    <%= image_tag(user['avatar_url']) %>
-  <% else %>
-    <%= image_tag('http://www.dejay.co.za/wp-content/uploads/2016/03/noimg.gif') %>
-  <% end %>
-  <h3>Username: <%= user['login'] %></h3>
-  <h3><%= link_to "GitHub Profile Link", user['html_url'] %></h3>
-<% end %>

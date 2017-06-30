@@ -1,0 +1,32 @@
+body {
+  height: 100%;
+}
+
+.navbar-default {
+  background-color: rgb(120, 120, 120);
+  
+  h1 {
+    color: rgb(255, 255, 255);
+  }
+}
+
+#error_message {
+  padding: 10px 15px;
+  background-color: rgb(255, 75, 75);
+  color: rgb(255, 255, 255);
+}
+
+.user_info {
+  margin: 10px -15px;
+}
+
+.follower_show {
+  margin: 10px auto;
+  
+}
+
+.follower_info {
+  float: left;
+  height: 386px;
+  text-overflow: ellipsis 
+}

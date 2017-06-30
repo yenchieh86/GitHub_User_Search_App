@@ -1,46 +1,53 @@
 <% if @user === 0 %>
-    <h2>Please enter a valid username</h2>
+  <div class='row'>
+    <h2 id='error_message' class='col-md-6 col-md-offset-3 text-center'>Please enter a valid username</h2>
+  </div>
 <% else %>
-    <%= image_tag(@user['avatar_url']) %>
-    <h3>Username: <%= @user['login'] %></h3>
-    <h3>GitHub ID: <%= @user['id'] %></h3>
-    <h3>Gravatar ID: <%= @user['gravatar_id '] === nil ? "No Gravatar ID" : @user['gravatar_id '] %> </h3>
-    <h3><%= link_to "GitHub API Search Link", @user['url'] %></h3>
-    <h3><%= link_to "GitHub Profile Link", @user['html_url'] %></h3>
-    <h3>Gists Link: <%= @user['gists_url'] %></h3>
-    <h3>Starred Link: <%= @user['starred_url'] %></h3>
-    <h3><%= link_to "Subscriptions Link", @user['subscriptions_url'] %></h3>
-    <h3><%= link_to "Organizations Link", @user['organizations_url'] %></h3>
-    <h3><%= link_to "Repos Link", @user['repos_url'] %></h3>
-    <h3>Events Link: <%= @user['events_url'] %></h3>
-    <h3><%= link_to "Received Events Link", @user['received_events_url'] %></h3>
-    <h3>User Type: <%= @user['type'] %></h3>
-    <h3>A Site Admin? : <%= @user['site_admin'] ? 'YES' : 'NO' %></h3>
-    <h3>Score: <%= @user['score'] %></h3>
-   ------------- 
-    <% if @followers[0].include?("login") %>
-        <div>
-            <h3>Total Follower: <%= @user["total_follower"] %></h3>
-        </div>
-        <div id='follower_btn_area'>
-            <%= form_tag(show_follower_path, remote: true, method: "get", id: 'show_follower') do %>
-                <%= hidden_field_tag :page_num, 1 %>
-                <%= hidden_field_tag :follower_link, @user['followers_url'] %>
-                <%= submit_tag("Show Follower") %>
-            <% end %>
-        </div>
-        <div id='follower_area'></div>
-    <% else %>
-        <div>
-            <%= @followers %>
-            <h1>This user doesn't have any followers</h1>
-        </div>
-    <% end %>
-    --------------
+  <div class='row user_info'>
+    <div class='col-md-6'>
+      <%= image_tag(@user['avatar_url'], class: "img-thumbnail") %>
+    </div>
+    <div class='col-md-6'>
+      <h4>Username: <%= @user['login'] %></h4>
+      <h4>GitHub ID: <%= @user['id'] %></h4>
+      <h4>Gravatar ID: <%= @user['gravatar_id '] === nil ? "No Gravatar ID" : @user['gravatar_id '] %> </h4>
+      <h4><%= link_to "GitHub API Search Link", @user['url'] %></h4>
+      <h4><%= link_to "GitHub Profile Link", @user['html_url'] %></h4>
+      <h4>Gists Link: <%= @user['gists_url'] %></h4>
+      <h4>Starred Link: <%= @user['starred_url'] %></h4>
+      <h4><%= link_to "Subscriptions Link", @user['subscriptions_url'] %></h4>
+      <h4><%= link_to "Organizations Link", @user['organizations_url'] %></h4>
+      <h4><%= link_to "Repos Link", @user['repos_url'] %></h4>
+      <h4>Events Link: <%= @user['events_url'] %></h4>
+      <h4><%= link_to "Received Events Link", @user['received_events_url'] %></h4>
+      <h4>User Type: <%= @user['type'] %></h4>
+      <h4>A Site Admin? : <%= @user['site_admin'] ? 'YES' : 'NO' %></h4>
+      <h4>Score: <%= @user['score'] %></h4>
+    </div>
+  </div>
+  
+  <% if @followers[0].include?("login") %>
+  
+    <div class='row'>
+      <div class='col-md-12'>
+        <h3>Total Follower: <%= @user["total_follower"] %></h3>
+      </div>
+      <div id='follower_btn_area' class='col-md-12'>
+        <%= form_tag(show_follower_path, remote: true, method: "get", id: 'show_follower') do %>
+          <%= hidden_field_tag :page_num, 1 %>
+          <%= hidden_field_tag :follower_link, @user['followers_url'] %>
+          <%= submit_tag("Show Follower", class: 'btn btn-info') %>
+        <% end %>
+      </div>
+    </div>
+    <div id='follower_area'></div>
+    
+  <% else %>
+  
+    <div class='row'>
+        <h2 id='error_message' class='col-md-6 col-md-offset-3 text-center'>This user doesn't have any followers</h2>
+    </div>
+    
+  <% end %>
+  
 <% end %>
-
-
-
-
-
-
