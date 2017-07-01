@@ -1,11 +1,6 @@
-# Shipt Coding Challenge
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-## Summary
+require_relative 'config/application'
 
-This is the project for Shipt Coding Challenge
-
-This app allows user to search for a GitHub user by his/her username.
-
-This app is created by using Ruby on Rails
-
----
+Rails.application.load_tasks

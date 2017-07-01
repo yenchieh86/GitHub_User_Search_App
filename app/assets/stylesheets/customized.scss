@@ -1,5 +1,12 @@
+html,
 body {
   height: 100%;
+}
+
+.debug_area {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .navbar-default {

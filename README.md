@@ -17,15 +17,15 @@ It will show the user's informations and followers
 
 ## Technical Choices and Experience
 
-Ruby, Ruby on Rails: 1 year
+- Ruby, Ruby on Rails: 1 year
 
-JavaScript/jQuery/Ajax: 1 year
+- JavaScript/jQuery/Ajax: 1 year
 
-HTML5: 1 year
+- HTML5: 1 year
 
-CSS3/Bootstrap: 1 year
+- CSS3/Bootstrap: 1 year
 
-Heroku: 1 year
+- Heroku: 1 year
 
 ---
 
@@ -45,7 +45,14 @@ Heroku: 1 year
 
 ## My Profile
 
-[GitHub](https://github.com/yenchieh86)
-[CodeWars](www.codewars.com/users/yenchieh86)
-[LinkedIn](www.linkedin.com/in/yenchiehchen)
+- [GitHub](https://github.com/yenchieh86)
+- [CodeWars](https://www.codewars.com/users/yenchieh86)
+- [LinkedIn](https://www.linkedin.com/in/yenchiehchen)
 
+---
+
+## Application
+
+[Heroku](https://yen-shipt-coding-test.herokuapp.com/)
+
+![Show-Img](https://raw.githubusercontent.com/yenchieh86/GitHub_User_Search_App/master/app/assets/images/show_img.jpg)
