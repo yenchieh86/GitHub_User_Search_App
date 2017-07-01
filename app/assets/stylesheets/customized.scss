@@ -1,12 +1,13 @@
-html,
-body {
+html {
   height: 100%;
 }
 
-.debug_area {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+body {
+  min-height: 100%;
+}
+
+.main_area {
+  margin-bottom: 20px;
 }
 
 .navbar-default {
@@ -25,6 +26,10 @@ body {
 
 .user_info {
   margin: 10px -15px;
+  
+  .img_area {
+    text-align: center;
+  }
 }
 
 .follower_show {
