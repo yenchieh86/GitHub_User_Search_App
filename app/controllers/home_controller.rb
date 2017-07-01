@@ -2,7 +2,6 @@ class HomeController < ApplicationController
   def index
   end
   
-  
   def search
     info = get_element("https://api.github.com/search/users?q=#{params[:q]}")
     
