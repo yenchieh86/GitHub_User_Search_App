@@ -6,6 +6,14 @@ body {
   min-height: 100%;
 }
 
+.navbar-default .navbar-brand {
+  color: white;
+  &:hover {
+    background-color: white;
+    color: rgb(120, 120, 120);
+  }
+}
+
 .main_area {
   margin-bottom: 20px;
 }
