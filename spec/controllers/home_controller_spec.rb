@@ -11,46 +11,48 @@ RSpec.describe HomeController, type: :controller do
   
   describe "GET #search" do
     before do
-      @follower_list = [
-        {
-          "login": "follower_a",
-          "id": 2398264,
-          "avatar_url": "https://avatars0.githubusercontent.com/u/2398264?v=3",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/follower_a",
-          "html_url": "https://github.com/follower_a",
-          "followers_url": "https://api.github.com/users/follower_a/followers",
-          "following_url": "https://api.github.com/users/follower_a/following{/other_user}",
-          "gists_url": "https://api.github.com/users/follower_a/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/follower_a/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/follower_a/subscriptions",
-          "organizations_url": "https://api.github.com/users/follower_a/orgs",
-          "repos_url": "https://api.github.com/users/follower_a/repos",
-          "events_url": "https://api.github.com/users/follower_a/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/follower_a/received_events",
-          "type": "User",
-          "site_admin": false
-        },
-        {
-          "login": "follower_b",
-          "id": 3164166,
-          "avatar_url": "https://avatars2.githubusercontent.com/u/3164166?v=3",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/follower_b",
-          "html_url": "https://github.com/follower_b",
-          "followers_url": "https://api.github.com/users/follower_b/followers",
-          "following_url": "https://api.github.com/users/follower_b/following{/other_user}",
-          "gists_url": "https://api.github.com/users/follower_b/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/follower_b/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/follower_b/subscriptions",
-          "organizations_url": "https://api.github.com/users/follower_b/orgs",
-          "repos_url": "https://api.github.com/users/follower_b/repos",
-          "events_url": "https://api.github.com/users/follower_b/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/follower_b/received_events",
-          "type": "User",
-          "site_admin": false
-        }
-      ]
+      @follower_list = %q!
+        [
+          {
+            "login": "follower_a",
+            "id": 2398264,
+            "avatar_url": "https://avatars0.githubusercontent.com/u/2398264?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/follower_a",
+            "html_url": "https://github.com/follower_a",
+            "followers_url": "https://api.github.com/users/follower_a/followers",
+            "following_url": "https://api.github.com/users/follower_a/following{/other_user}",
+            "gists_url": "https://api.github.com/users/follower_a/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/follower_a/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/follower_a/subscriptions",
+            "organizations_url": "https://api.github.com/users/follower_a/orgs",
+            "repos_url": "https://api.github.com/users/follower_a/repos",
+            "events_url": "https://api.github.com/users/follower_a/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/follower_a/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          {
+            "login": "follower_b",
+            "id": 3164166,
+            "avatar_url": "https://avatars2.githubusercontent.com/u/3164166?v=3",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/follower_b",
+            "html_url": "https://github.com/follower_b",
+            "followers_url": "https://api.github.com/users/follower_b/followers",
+            "following_url": "https://api.github.com/users/follower_b/following{/other_user}",
+            "gists_url": "https://api.github.com/users/follower_b/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/follower_b/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/follower_b/subscriptions",
+            "organizations_url": "https://api.github.com/users/follower_b/orgs",
+            "repos_url": "https://api.github.com/users/follower_b/repos",
+            "events_url": "https://api.github.com/users/follower_b/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/follower_b/received_events",
+            "type": "User",
+            "site_admin": false
+          }
+        ]
+      !
     end
     
     describe "didn't enter username" do
@@ -230,14 +232,17 @@ RSpec.describe HomeController, type: :controller do
         !
         
         allow_any_instance_of(ApplicationController).to receive(:get_element).and_return(@github_response)
+        allow_any_instance_of(ApplicationController).to receive(:get_follower_list).and_return(@follower_list)
       end
     
       it 'should be 0' do
         user = JSON.parse(@github_response)["items"][2]
         user["total_follower"] = ''
+        follower_list = JSON.parse(@follower_list)
         get :search, params: { q: 'test_c' }, xhr: true
         
         expect(assigns(:user)).to eq user
+        expect(assigns(:followers)).to eq follower_list
       end
     end
   end
