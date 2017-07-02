@@ -26,7 +26,7 @@
     </div>
   </div>
   
-  <% if @followers[0].include?("login") %>
+  <% if @followers.size > 0 %>
     <div class='row'>
       <div class='col-md-12'>
         <h3>Total Follower: <%= @user["total_follower"] %></h3>

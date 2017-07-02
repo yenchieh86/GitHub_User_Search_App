@@ -7,8 +7,9 @@ class ApplicationController < ActionController::Base
     result = Net::HTTP.get(uri)
   end
   
-  def separate_user_from_list(link)
-    get_element(link).split('},{')
+  def get_follower_list(link)
+    uri = URI(link)
+    result = Net::HTTP.get(uri)
   end
   
   def get_user_profile_page(username)

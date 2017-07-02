@@ -4,27 +4,11 @@ class FollowersController < ApplicationController
     @last_button = false
     @current_page = params[:page_num].to_i
     @link = params[:follower_link]
-    @followers = Array.new
-    list = separate_user_from_list("#{@link}?page=#{@current_page}")
+    @followers = JSON.parse(page_num(@current_page))
+    next_page_list = JSON.parse(page_num(@current_page + 1))
     
-    list.each do |info|
-      user = {}
-      arr = info.split(',')
-      arr.each do |prop|
-        if prop.include? "login"
-          user["login"] = prop.split('":')[1]
-        elsif prop.include? "avatar_url"
-          user["avatar_url"] = prop.split('":')[1]
-        elsif prop.include? "html_url"
-          user["html_url"] = prop.split('":')[1]
-        end
-      end
-      user.each_value { |value| value.delete!('"') }
-      @followers.push(user)
-    end
-    
-    @next_button = true if separate_user_from_list("#{@link}?page=#{@current_page + 1}")[0].include?('login')
-    @last_button = true if separate_user_from_list("#{@link}?page=#{@current_page - 1}")[0].include?('login')
+    @next_button = true if next_page_list.length > 0
+    @last_button = true if @current_page - 1 > 0
     
     respond_to do |format|
       format.js
@@ -33,5 +17,7 @@ class FollowersController < ApplicationController
   
   private
   
-    
+    def page_num(num)
+      get_follower_list("#{@link}?page=#{num}")
+    end
 end
