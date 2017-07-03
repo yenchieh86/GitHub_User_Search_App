@@ -18,8 +18,10 @@ class HomeController < ApplicationController
       if(@user === nil)
         @user = 0
       else
+        @user['following_url'].chomp!("{/other_user}")
         @user["total_follower"] = get_user_profile_page(params[:q])
         @followers = JSON.parse(get_follower_list("https://api.github.com/users/#{params[:q]}/followers"))
+        @following = JSON.parse(get_follower_list("https://api.github.com/users/#{params[:q]}/following"))
       end
     end
     

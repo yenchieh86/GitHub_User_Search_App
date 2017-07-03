@@ -1,0 +1,5 @@
+<%= form_tag(show_follower_path, remote: true, method: 'get') do %>
+  <%= hidden_field_tag :page_num, 1 %>
+  <%= hidden_field_tag :link, link %>
+  <%= submit_tag(submit_btn_title, class: class_name, id: submit_btn_id) %>
+<% end %>

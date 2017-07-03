@@ -3,7 +3,7 @@ class FollowersController < ApplicationController
     @next_button = false
     @last_button = false
     @current_page = params[:page_num].to_i
-    @link = params[:follower_link]
+    @link = params[:link]
     @followers = JSON.parse(page_num(@current_page))
     next_page_list = JSON.parse(page_num(@current_page + 1))
     

@@ -1,24 +1,26 @@
 <% if @user === 0 %>
   <div class='row'>
-    <h2 id='error_message' class='col-md-6 col-md-offset-3 text-center'>Please enter a valid username</h2>
+    <h2 id='error_message' class='col-md-6 col-md-offset-3'>Please enter a valid username</h2>
   </div>
 <% else %>
   <div class='row user_info'>
     <div class='col-md-6 img_area'>
-      <%= image_tag(@user['avatar_url'], class: "img-thumbnail") %>
+      <% if @user['avatar_url'] %>
+        <%= image_tag(@user['avatar_url'], class: "img-thumbnail", size: '360') %>
+      <% else %>
+        <%= image_tag('http://www.dejay.co.za/wp-content/uploads/2016/03/noimg.gif', class: "img-thumbnail", size: '360') %>
+      <% end %>
     </div>
-    <div class='col-md-6'>
+    
+    <div class='col-md-6 user_data'>
       <h4>Username: <%= @user['login'] %></h4>
       <h4>GitHub ID: <%= @user['id'] %></h4>
       <h4>Gravatar ID: <%= @user['gravatar_id '] === nil ? "No Gravatar ID" : @user['gravatar_id '] %> </h4>
       <h4><%= link_to "GitHub API Search Link", @user['url'] %></h4>
       <h4><%= link_to "GitHub Profile Link", @user['html_url'] %></h4>
-      <h4>Gists Link: <%= @user['gists_url'] %></h4>
-      <h4>Starred Link: <%= @user['starred_url'] %></h4>
       <h4><%= link_to "Subscriptions Link", @user['subscriptions_url'] %></h4>
       <h4><%= link_to "Organizations Link", @user['organizations_url'] %></h4>
       <h4><%= link_to "Repos Link", @user['repos_url'] %></h4>
-      <h4>Events Link: <%= @user['events_url'] %></h4>
       <h4><%= link_to "Received Events Link", @user['received_events_url'] %></h4>
       <h4>User Type: <%= @user['type'] %></h4>
       <h4>A Site Admin? : <%= @user['site_admin'] ? 'YES' : 'NO' %></h4>
@@ -26,23 +28,26 @@
     </div>
   </div>
   
-  <% if @followers.size > 0 %>
-    <div class='row'>
+  <% if @followers.size > 0 || @following.size > 0 %>
+    <div class='row follower_following_button'>
       <div class='col-md-12'>
         <h3>Total Follower: <%= @user["total_follower"] %></h3>
       </div>
+      
       <div id='follower_btn_area' class='col-md-12'>
-        <%= form_tag(show_follower_path, remote: true, method: "get", id: 'show_follower') do %>
-          <%= hidden_field_tag :page_num, 1 %>
-          <%= hidden_field_tag :follower_link, @user['followers_url'] %>
-          <%= submit_tag("Show Follower", class: 'btn btn-info') %>
+        <% if(@followers.size > 0) %>
+          <%= render partial: "button", locals: {submit_btn_title: 'Show Follower', submit_btn_id: 'follower_btn', link: @user['followers_url'], class_name: 'btn btn-info'} %>
+        <% end %>
+        <% if(@following.size > 0) %>
+          <%= render partial: "button", locals: {submit_btn_title: 'Show Following', submit_btn_id: 'following_btn', link: @user['following_url'], class_name: 'btn btn-warning'} %>
         <% end %>
       </div>
     </div>
+    
     <div id='follower_area'></div>
   <% else %>
     <div class='row'>
-        <h2 id='error_message' class='col-md-6 col-md-offset-3 text-center'>This user doesn't have any followers</h2>
+      <h2 id='error_message' class='col-md-6 col-md-offset-3 text-center'>This user doesn't have any followers</h2>
     </div>
   <% end %>
 <% end %>

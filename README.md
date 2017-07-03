@@ -9,7 +9,8 @@ It will show the user's informations and followers
 **How to use**
 - enter username and press *Search* button
 - will show *Please enter a valid username* when there's no input or can't find match user
-- use *Show Follower* buuton to show the user's followers, and also can use *Last Page* and *Next Page* button to switch between pages
+- use *Show Follower* button to show the user's followers, or use *Show Following* button to show people who user is following
+- can use *Last Page* and *Next Page* button to switch between pages
 - will show *This user doesn't have any followers* when the user has no follower
 - the *Next Page* button will hidden when you load the last page of user follower
 
@@ -33,9 +34,6 @@ It will show the user's informations and followers
 
 **Need to be a Single Page Application**
 - use Ajax to clear and append different partial, so the browser doesn't need to reload the whole page
-
-**The data received from GitHub API is String type (JSON)**
-- use JSON.parse to change String back to Array or Hash
 
 **Show User Total Follwers**
 - use Rails to get the HTML file of user's profile page
