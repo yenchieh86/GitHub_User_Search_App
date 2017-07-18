@@ -33,22 +33,31 @@ It will show the user's informations and followers
 ## Problem and solution
 
 **Need to be a Single Page Application**
+
 - use Ajax to clear and append different partial, so the browser doesn't need to reload the whole page
 
 **Show User Total Follwers**
+
 - use Rails to get the HTML file of user's profile page
 - use Regex to filter out the number of total follwers from that HTML file 
 
 **Some method need to access to GitHub API**
+
 - use stub on the controller test
 - add two methods in application controller (*get_element*, *get_follower_list*),
   so I can use stub to let them return different data
+
+**I don't have inspiration about how I want to design the application**
+
+- I decided to spend most of my time on the code and test, just use little time on the style
+- I will check out other website style, to see which can be used on this website, then style it
 
 ---
 
 ## Scalability
 
 **DataBase**
+
 - I keep the Active Record for this project, so it can have model and database.
 - If don't need model and database, then should use *--skip-active-record* instead, than the size of App can be smaller.
 
@@ -64,6 +73,6 @@ It will show the user's informations and followers
 
 ## Application
 
-[Heroku](https://yen-shipt-coding-test.herokuapp.com/)
+[Heroku](https://yen-search-github-user.herokuapp.com/)
 
 ![Show-Img](https://raw.githubusercontent.com/yenchieh86/GitHub_User_Search_App/master/app/assets/images/show_img.jpg)
